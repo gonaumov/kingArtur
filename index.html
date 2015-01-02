@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251" />
+<title>Келтска приказка</title>
+<style type="text/css">
+    #showText {
+		 margin: 0px auto;
+		 font-size: 110%;
+		 width: 60%;
+		 text-align: justify;
+	}
+	body {
+		text-align: center;
+	}
+</style>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+var sentences = [
+		'Имало някога прочут крал на Келтите - крал Артур.',
+		'Крал Артур бил пленен от едно чудовище.',
+		'И то му казало: "Ще те пусна, ако ми отговориш - какво жените желаят най-силно?" И всички жени в двореца разкрили на краля най-съкровенните си желания - такива, че ако ги чуеш, ушите ти ще окапят.',
+		'Но чудовището неизменно отговаряло: "Не, не е това!".',
+		'Тъй приближавал денят, в който крал Артур трябвало да умре, ако не отговори.',
+		'Тогава дошла сестрата на чудовището - на вид страрица, но по-страшна и по-отвратителна дори от самото чудовище.',
+		'И тя казала че ще разкрие тайната ако някои млад и хубав рицар се ожени за нея.',
+		'И то не само пред олтара, ами ако изпълни мъжката си служба върху ложето й.',
+		'Но макар да ставало дума за живота на крал Артур и за гибелта на кралството, никой рицар не се наел - не само от отвращение, но и от страх че няма да има сили да изпълни мъжкия си дълг.',
+		'Съгласил се рицарят Ланчелот, най-светлият меч на келтите.',
+		'И се оженил, и легнал с вещицата в ложето, и бил мъж.',
+		'А вещицата се превърнала в прегръдките му в прекрасна девойка и му прошепнала тайната: "Жените най-силно желаят да имат власт".',
+		'Тъй крал Артур и кралството на келтите били спасени.'
+    ];
+
+$(document).ready(function() {
+    $("<div/>", {
+		class: "sentenceHolder",
+		text: sentences[0]
+	}).css("display", "none").appendTo("#showText").show("slow");
+	
+	$("<a/>", {
+		class: "nextSentence",
+		text: "Продължи",
+		href: "0"
+	}).appendTo("#showText");
+});
+
+$(document).on("click", "a.nextSentence", function(event){
+	 if(/([0-9]+)$/.test(this.href)) {
+	    var index = parseInt(RegExp.$1, 10);
+		if (typeof sentences[++index] != 'undefined') {
+			var holder = $("#showText");
+			    holder.empty();
+		        $("<div/>", {
+		class: "sentenceHolder",
+		text: sentences[index]
+	}).css("display", "none").appendTo("#showText").show("slow");
+	      if (typeof sentences[++index] != 'undefined')  {
+	$("<a/>", {
+		class: "nextSentence",
+		text: "Продължи",
+		href: --index
+	}).appendTo("#showText");	
+		}
+	
+		}
+	 }
+	 event.preventDefault();
+});
+</script>
+</head>
+<body>
+<img src="sword.jpg" border="0"/>
+<div id="showText">
+ 
+</div>
+</body>
+</html>
